@@ -1,0 +1,2 @@
+# FAMA
+This is a software that come to solve the problem of farmers who faces loss due to inaccessibility to the broad market. FAMA gives farmers and agribusinesses the opportunity to do business regardless of where they are.  This gives the farmers access to a broad demand where they  deal with buyers directly without long supply chain. On another hand, it helps agribusiness entrepreneurs to make choice among a lot of suppliers available.
