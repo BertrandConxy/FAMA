@@ -9,7 +9,6 @@ type FormValues = {
 const logInAuth = (user: FormValues) => {
   const stringData = localStorage.getItem("users");
   const users: FormValues[] = stringData ? JSON.parse(stringData) : [];
-  console.log(users);
   users.forEach((data) => {
     if (data.email === user.email && data.password === user.password) {
       alert("Signned in successfully");
