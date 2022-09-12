@@ -1,11 +1,15 @@
 import React from 'react';
+import Login from './components/Login';
+import SignUp from './components/SignUp';
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="App">
-     <h1>Hello world</h1>
+    <div>
+      <h1>Hello world</h1>
+      <Login/>
+      <SignUp/>
     </div>
-  );
+  )
 }
 
 export default App;
