@@ -13,9 +13,8 @@ const logInAuth = (user: FormValues) => {
     if (data.email === user.email && data.password === user.password) {
       alert("Signned in successfully");
       localStorage.setItem("currentUser", JSON.stringify(data));
-      console.log("sucess");
     } else {
-      console.log("invalid");
+      alert("invalid password or Email");
     }
   });
 };

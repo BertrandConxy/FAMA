@@ -19,7 +19,6 @@ const SignUp: React.FC = () => {
   const { register, handleSubmit } = useForm<FormValues>();
 
   const onSubmit: SubmitHandler<FormValues> = (data, e) => {
-    console.log(data);
     saveToLocalStorage('users', data);
     e?.target.reset();
   };
