@@ -1,19 +1,28 @@
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 
-// interface SignUpProps {
-
-// }
-
 type FormValues = {
   fullName: string;
   email: string;
   password: string;
 };
 
+const saveToLocalStorage = (name: string, data: FormValues) => {
+  const stringData = localStorage.getItem(name);
+  const storeArray: FormValues[] =
+    localStorage[name] && stringData ? JSON.parse(stringData) : [];
+  storeArray.push(data);
+  localStorage.setItem(name, JSON.stringify(storeArray));
+};
+
 const SignUp: React.FC = () => {
   const { register, handleSubmit } = useForm<FormValues>();
-  const onSubmit: SubmitHandler<FormValues> = (data) => console.log(data);
+
+  const onSubmit: SubmitHandler<FormValues> = (data, e) => {
+    console.log(data);
+    saveToLocalStorage('users', data);
+    e?.target.reset();
+  };
   return (
     <>
       <h2>Sign Up Form</h2>
