@@ -20,7 +20,7 @@ const logInAuth = (user: FormValues) => {
 };
 
 const LogIn: React.FC = () => {
-  const { register, handleSubmit } = useForm<FormValues>();
+  const { register, handleSubmit, formState: { errors } } = useForm<FormValues>();
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     logInAuth(data);
   };
@@ -30,14 +30,16 @@ const LogIn: React.FC = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <input
           type="email"
-          {...register("email")}
+          {...register("email", { required: true })}
           placeholder="Enter your Email"
         />
+        {errors.email && "Email is required"}
         <input
           type="password"
-          {...register("password")}
+          {...register("password", { required: true })}
           placeholder="Enter your Password"
         />
+        {errors.password && "First name is required"}
 
         <input type="submit" value="Log in" />
       </form>
