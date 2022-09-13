@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 type FormValues = {
@@ -20,7 +21,7 @@ const logInAuth = (user: FormValues) => {
 };
 
 const LogIn: React.FC = () => {
-  const { register, handleSubmit } = useForm<FormValues>();
+  const { register, handleSubmit, formState: { errors } } = useForm<FormValues>();
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     logInAuth(data);
   };
@@ -30,14 +31,20 @@ const LogIn: React.FC = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <input
           type="email"
-          {...register("email")}
+          {...register("email", { required: true })}
           placeholder="Enter your Email"
         />
+        {errors.email && "Email is required"}
         <input
           type="password"
-          {...register("password")}
+          {...register("password", { required: true })}
           placeholder="Enter your Password"
         />
+        {errors.password && "First name is required"}
+
+        <span>
+          <Link to="/signup">Create account</Link>
+        </span>
 
         <input type="submit" value="Log in" />
       </form>

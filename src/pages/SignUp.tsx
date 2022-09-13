@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 type FormValues = {
@@ -16,11 +17,12 @@ const saveToLocalStorage = (name: string, data: FormValues) => {
 };
 
 const SignUp: React.FC = () => {
-  const { register, handleSubmit } = useForm<FormValues>();
-
+  const { register, handleSubmit, formState:{ errors } } = useForm<FormValues>();
+  const navigate = useNavigate();
   const onSubmit: SubmitHandler<FormValues> = (data, e) => {
     saveToLocalStorage('users', data);
     e?.target.reset();
+    navigate('../login');
   };
   return (
     <>
@@ -28,19 +30,22 @@ const SignUp: React.FC = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <input
           type="text"
-          {...register("fullName")}
+          {...register("fullName", { required: true })}
           placeholder="Enter your Full name"
         />
+        {errors.fullName && "First name is required"}
         <input
           type="email"
-          {...register("email")}
+          {...register("email", { required: true })}
           placeholder="Enter your Email"
         />
+        {errors.email && "Email is required"}
         <input
           type="password"
-          {...register("password")}
+          {...register("password", { required: true, minLength: 6 })}
           placeholder="Enter your Password"
         />
+        {errors.password && "Passqord is required and must be at least 6 characters long"}
 
         <input type="submit" value="Sign up" />
       </form>
