@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 type FormValues = {
@@ -40,6 +41,10 @@ const LogIn: React.FC = () => {
           placeholder="Enter your Password"
         />
         {errors.password && "First name is required"}
+
+        <span>
+          <Link to="/signup">Create account</Link>
+        </span>
 
         <input type="submit" value="Log in" />
       </form>
