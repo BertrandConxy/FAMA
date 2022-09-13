@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 type FormValues = {
@@ -17,10 +18,11 @@ const saveToLocalStorage = (name: string, data: FormValues) => {
 
 const SignUp: React.FC = () => {
   const { register, handleSubmit, formState:{ errors } } = useForm<FormValues>();
-
+  const navigate = useNavigate();
   const onSubmit: SubmitHandler<FormValues> = (data, e) => {
     saveToLocalStorage('users', data);
     e?.target.reset();
+    navigate('../login');
   };
   return (
     <>
