@@ -10,20 +10,20 @@ type FormValues = {
 
 
 const logInAuth = (user: FormValues) => {
-const { toggleAuth } = useContext(AuthContext);
   const stringData = localStorage.getItem("users");
   const users: FormValues[] = stringData ? JSON.parse(stringData) : [];
   users.forEach((data) => {
     if (data.email === user.email && data.password === user.password) {
       alert("Signned in successfully");
       localStorage.setItem("currentUser", JSON.stringify(data));
-      toggleAuth()
+      
     } else {
       alert("invalid password or Email");
     }
   });
 };
 
+const { toggleAuth } = useContext(AuthContext);
 const LogIn: React.FC = () => {
 
   const {
@@ -33,6 +33,8 @@ const LogIn: React.FC = () => {
   } = useForm<FormValues>();
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     logInAuth(data);
+    toggleAuth();
+
   };
 
   return (
