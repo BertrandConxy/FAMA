@@ -7,7 +7,8 @@ const Home: React.FC = () => {
   const navigate = useNavigate();
   useEffect(()=> {
     if (!auth) navigate('../login')
-  }, [auth])
+  }, [])
+
   return (
     <>
     <h1>

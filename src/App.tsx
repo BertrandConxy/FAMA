@@ -19,7 +19,7 @@ export const AuthContext = createContext<AuthContext>({ ...defaultValue });
 
 const App: React.FC = () => {
   const [auth, setAuth] = useState(false);
-  const toggleAuth = ()=> setAuth(!auth);
+  const toggleAuth = ()=> setAuth(true);
   return (
     <div>
       <AuthContext.Provider value={{ auth, toggleAuth }}>

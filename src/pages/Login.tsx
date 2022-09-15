@@ -1,19 +1,23 @@
-import React from "react";
+import React, {useContext} from "react";
 import { Link } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
+import {AuthContext} from '../App';
 
 type FormValues = {
   email: string;
   password: string;
 };
 
+
 const logInAuth = (user: FormValues) => {
+const { toggleAuth } = useContext(AuthContext);
   const stringData = localStorage.getItem("users");
   const users: FormValues[] = stringData ? JSON.parse(stringData) : [];
   users.forEach((data) => {
     if (data.email === user.email && data.password === user.password) {
       alert("Signned in successfully");
       localStorage.setItem("currentUser", JSON.stringify(data));
+      toggleAuth()
     } else {
       alert("invalid password or Email");
     }
@@ -21,6 +25,7 @@ const logInAuth = (user: FormValues) => {
 };
 
 const LogIn: React.FC = () => {
+
   const {
     register,
     handleSubmit,
