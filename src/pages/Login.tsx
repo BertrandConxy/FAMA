@@ -1,11 +1,13 @@
-import React from "react";
+import React, {useContext} from "react";
 import { Link } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
+import {AuthContext} from '../App';
 
 type FormValues = {
   email: string;
   password: string;
 };
+
 
 const logInAuth = (user: FormValues) => {
   const stringData = localStorage.getItem("users");
@@ -14,17 +16,27 @@ const logInAuth = (user: FormValues) => {
     if (data.email === user.email && data.password === user.password) {
       alert("Signned in successfully");
       localStorage.setItem("currentUser", JSON.stringify(data));
+      
     } else {
       alert("invalid password or Email");
     }
   });
 };
 
+const { toggleAuth } = useContext(AuthContext);
 const LogIn: React.FC = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm<FormValues>();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormValues>();
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     logInAuth(data);
+    toggleAuth();
+
   };
+
   return (
     <>
       <h2>Log in Form</h2>
