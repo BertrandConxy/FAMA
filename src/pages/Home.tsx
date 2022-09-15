@@ -1,16 +1,18 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect} from "react";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../App";
 
 const Home: React.FC = () => {
-  const {auth, toggleAuth} = useContext(AuthContext);
+  const {auth} = useContext(AuthContext);
+  const navigate = useNavigate();
+  useEffect(()=> {
+    if (!auth) navigate('../login')
+  }, [auth])
   return (
     <>
     <h1>
-      Hello <span>{`${auth}`}</span>{" "}
+      Hello User
     </h1>
-    <button  onClick={
-      () => toggleAuth()
-    } >Click</button>
     </>
   );
 };
